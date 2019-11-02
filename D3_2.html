@@ -1,0 +1,40 @@
+<h1>Click anywhere to add a point!</h1>
+<head>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8">
+	</script>
+	<style>
+    .axis text {
+      font-size: 1em;
+    }
+    .axis path,
+	.axis line {
+  	  fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+      stroke-width: 2px;
+    }
+}
+
+    </style>
+</head>
+<body>
+	<svg width="1000" height="600">
+	</svg>
+	<script type="text/javascript">
+		var xscale = d3.scale.linear().domain([-35,35]).range([100, 800]);
+		var xAxis = d3.svg.axis().scale(xscale).orient("bottom").ticks(15).tickSize(7);
+		var yscale = d3.scale.linear().domain([20,-20]).range([100, 500]);
+		var yAxis = d3.svg.axis().scale(yscale).orient("left").tickSize(7);
+		var svg = d3.select("svg");
+		svg.append("text").attr("x",0).attr("y",500).text("Positions will be displayed here")
+		svg.append("g").attr("class","x axis").attr("transform","translate(100,300)").call(xAxis).append("g").attr("class","y axis").attr("transform","translate(450,-300)").call(yAxis);
+		svg.on("click", function () {
+    		mouse = d3.mouse(this);
+    		svg.append("circle").attr("cx",mouse[0]).attr("cy",mouse[1]).attr("r",7).attr("fill","red");
+    		x= -35+((mouse[0]-200)/10)
+    		y= 20-((mouse[1]-100)/10)
+    		d3.select("text").attr("x",0).attr("y",500).text("New point added at: "+ x +" , " + y)
+		});
+		
+	</script>
+</body>

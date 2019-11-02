@@ -1,0 +1,16 @@
+<h1>Click anywhere to add a point!</h1>
+<head>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8">
+	</script>
+</head>
+<body>
+	<svg width="1500" height="1000">
+	</svg>
+	<script type="text/javascript">
+		var svg = d3.select("svg");
+		svg.on("click", function () {
+    		var mouse = d3.mouse(this);
+    		svg.append("circle").attr("cx",mouse[0]).attr("cy",mouse[1]).attr("r",7).attr("fill","red");
+		});
+	</script>
+</body>
